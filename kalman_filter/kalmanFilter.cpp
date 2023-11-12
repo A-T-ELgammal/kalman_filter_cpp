@@ -20,3 +20,12 @@ gaussianDistribution Kalmanfilter::measurementUpdate(gaussianDistribution priorB
     gaussianDistribution postreior(updatedMu, updatedSigmaSquared);
     return postreior;
 }
+
+gaussianDistribution Kalmanfilter::statePrediction(gaussianDistribution measurementUpdate(), gaussianDistribution motion)
+{
+    gaussianDistribution posterior = measurementUpdate();
+    double newMu = posterior.getMu() + motion.getMu();
+    double newSigmaSquared = posterior.getSigmaSquared() + motion.getSigmaSquared();
+    gaussianDistribution newState(newMu, newSigmaSquared);
+    return newState;
+}

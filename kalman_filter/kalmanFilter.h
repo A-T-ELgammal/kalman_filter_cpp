@@ -29,7 +29,8 @@ class Kalmanfilter
 {
 public:
     double getNormalDistributionProbability(gaussianDistribution gd, const double x);
-    gaussianDistribution measurementUpdate(gaussianDistribution gd1, gaussianDistribution gd2);
+    gaussianDistribution measurementUpdate(gaussianDistribution briorBlief, gaussianDistribution measurement);
+    gaussianDistribution statePrediction(gaussianDistribution measurementUpdate(), gaussianDistribution motion);
 };
 
 #endif
