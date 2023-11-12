@@ -11,6 +11,12 @@ double Kalmanfilter::getNormalDistributionProbability(gaussianDistribution gd, c
     return normalDistributionProbability;
 }
 
-// void Kalmanfilter::measurementUpdate(double mu, double sigmaSquared, double muUpdated, double sigmaSquaredUpdated)
-// {
-// }
+gaussianDistribution Kalmanfilter::measurementUpdate(gaussianDistribution priorBlief, gaussianDistribution measurement)
+{
+    double updatedMu, updatedSigmaSquared;
+    updatedMu = ((measurement.getSigmaSquared() * priorBlief.getMu()) + (priorBlief.getSigmaSquared() * measurement.getMu())) /
+                (priorBlief.getSigmaSquared() + measurement.getSigmaSquared());
+    updatedSigmaSquared = pow((pow(priorBlief.getSigmaSquared(), -1)) + (pow(measurement.getSigmaSquared(), -1)), -1);
+    gaussianDistribution postreior(updatedMu, updatedSigmaSquared);
+    return postreior;
+}

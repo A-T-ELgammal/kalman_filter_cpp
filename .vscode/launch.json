@@ -5,7 +5,7 @@
       "name": "Debug C++",
       "type": "cppdbg",
       "request": "launch",
-      "program": "${workspaceFolder}/${fileBasenameNoExtension}",
+      "program": "${workspaceFolder}/kalman_filter/main",
       "args": [],
       "stopAtEntry": false,
       "cwd": "${workspaceFolder}",

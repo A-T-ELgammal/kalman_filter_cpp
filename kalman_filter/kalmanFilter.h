@@ -7,6 +7,7 @@ using namespace std;
 
 struct gaussianDistribution
 {
+    gaussianDistribution() {}
     gaussianDistribution(double mu, double sigmaSquared)
     {
         if (mu <= 0 || sigmaSquared <= 0)
@@ -27,8 +28,8 @@ private:
 class Kalmanfilter
 {
 public:
-    double getNormalDistributionProbability(const gaussianDistribution gd, const double x);
-    // gaussianDistribution measurementUpdate(const );
+    double getNormalDistributionProbability(gaussianDistribution gd, const double x);
+    gaussianDistribution measurementUpdate(gaussianDistribution gd1, gaussianDistribution gd2);
 };
 
 #endif

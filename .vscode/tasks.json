@@ -7,9 +7,9 @@
       "args": [
         "-g",
         "-std=c++17",
-        "${fileDirname}/*.cpp",
+        "${workspaceFolder}/kalman_filter/*.cpp",
         "-o",
-        "${fileDirname}/${fileBasenameNoExtension}"
+        "${workspaceFolder}/kalman_filter/main"
       ],
       "options": {
         "cwd": "${fileDirname}"
