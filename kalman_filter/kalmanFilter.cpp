@@ -6,9 +6,8 @@ using namespace std;
 double Kalmanfilter::getNormalDistributionProbability(gaussianDistribution gd, const double x)
 {
     double mu = gd.getMu(),
-           sigma = sqrt(gd.getSigmaSquared()),
-           normalDistributionProbability = pow(sigma * sqrt(2 * M_PI), -1) * exp(-0.5 * pow((x - mu) / sigma, 2));
-    return normalDistributionProbability;
+           sigma = sqrt(gd.getSigmaSquared());
+    return (pow(sigma * sqrt(2 * M_PI), -1) * exp(-0.5 * pow((x - mu) / sigma, 2)));
 }
 
 gaussianDistribution Kalmanfilter::measurementUpdate(gaussianDistribution priorBlief, gaussianDistribution measurement)
@@ -17,8 +16,7 @@ gaussianDistribution Kalmanfilter::measurementUpdate(gaussianDistribution priorB
     updatedMu = ((measurement.getSigmaSquared() * priorBlief.getMu()) + (priorBlief.getSigmaSquared() * measurement.getMu())) /
                 (priorBlief.getSigmaSquared() + measurement.getSigmaSquared());
     updatedSigmaSquared = pow((pow(priorBlief.getSigmaSquared(), -1)) + (pow(measurement.getSigmaSquared(), -1)), -1);
-    gaussianDistribution postreior(updatedMu, updatedSigmaSquared);
-    return postreior;
+    return {updatedMu, updatedSigmaSquared};
 }
 
 gaussianDistribution Kalmanfilter::statePrediction(gaussianDistribution measurementUpdate(), gaussianDistribution motion)
@@ -26,6 +24,5 @@ gaussianDistribution Kalmanfilter::statePrediction(gaussianDistribution measurem
     gaussianDistribution posterior = measurementUpdate();
     double newMu = posterior.getMu() + motion.getMu();
     double newSigmaSquared = posterior.getSigmaSquared() + motion.getSigmaSquared();
-    gaussianDistribution newState(newMu, newSigmaSquared);
-    return newState;
+    return {newMu, newSigmaSquared};
 }
