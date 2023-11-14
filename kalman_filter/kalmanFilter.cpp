@@ -26,7 +26,7 @@ gaussianDistribution Kalmanfilter::statePrediction(gaussianDistribution posterio
     return {newMu, newSigmaSquared};
 }
 
-void Kalmanfilter::oneDKalmanFilter(float (&motion)[], double &motionSigmaSquared, float (&measurements)[], double &measurementsSigmaSquared, int totalMotions, double initMu, double initSigmaSquared)
+void Kalmanfilter::oneDKalmanFilter(double motion[], double &motionSigmaSquared, const double measurements[], const double &measurementsSigmaSquared, int totalMotions, double initMu, double initSigmaSquared)
 {
     for (int i = 0; i < totalMotions; i++)
     {

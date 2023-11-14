@@ -10,7 +10,7 @@ struct gaussianDistribution
     gaussianDistribution() {}
     gaussianDistribution(double mu, double sigmaSquared)
     {
-        if (mu <= 0 || sigmaSquared <= 0)
+        if (mu < 0 || sigmaSquared < 0)
             throw invalid_argument("mu or sigmaSquared invalid");
 
         this->mu = mu;
@@ -31,7 +31,7 @@ public:
     double getNormalDistributionProbability(gaussianDistribution gd, const double x);
     gaussianDistribution measurementUpdate(gaussianDistribution briorBlief, gaussianDistribution measurement);
     gaussianDistribution statePrediction(gaussianDistribution posterior, gaussianDistribution motion);
-    void oneDKalmanFilter(float (&motion)[], double &motionSigmaSquared, float (&measurements)[], double &measurementsSigmaSquared, int totalMotions, double initMu, double initSigmaSquared);
+    void oneDKalmanFilter(double motion[], double &motionSigmaSquared, const double measurements[], const double &measurementsSigmaSquared, int totalMotions, double initMu, double initSigmaSquared);
 };
 
 #endif
