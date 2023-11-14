@@ -30,7 +30,8 @@ class Kalmanfilter
 public:
     double getNormalDistributionProbability(gaussianDistribution gd, const double x);
     gaussianDistribution measurementUpdate(gaussianDistribution briorBlief, gaussianDistribution measurement);
-    gaussianDistribution statePrediction(gaussianDistribution measurementUpdate(), gaussianDistribution motion);
+    gaussianDistribution statePrediction(gaussianDistribution posterior, gaussianDistribution motion);
+    void oneDKalmanFilter(float (&motion)[], double &motionSigmaSquared, float (&measurements)[], double &measurementsSigmaSquared, int totalMotions, double initMu, double initSigmaSquared);
 };
 
 #endif

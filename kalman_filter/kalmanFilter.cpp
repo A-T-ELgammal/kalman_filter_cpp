@@ -19,10 +19,25 @@ gaussianDistribution Kalmanfilter::measurementUpdate(gaussianDistribution priorB
     return {updatedMu, updatedSigmaSquared};
 }
 
-gaussianDistribution Kalmanfilter::statePrediction(gaussianDistribution measurementUpdate(), gaussianDistribution motion)
+gaussianDistribution Kalmanfilter::statePrediction(gaussianDistribution posterior, gaussianDistribution motion)
 {
-    gaussianDistribution posterior = measurementUpdate();
     double newMu = posterior.getMu() + motion.getMu();
     double newSigmaSquared = posterior.getSigmaSquared() + motion.getSigmaSquared();
     return {newMu, newSigmaSquared};
+}
+
+void Kalmanfilter::oneDKalmanFilter(float (&motion)[], double &motionSigmaSquared, float (&measurements)[], double &measurementsSigmaSquared, int totalMotions, double initMu, double initSigmaSquared)
+{
+    for (int i = 0; i < totalMotions; i++)
+    {
+
+        gaussianDistribution initialStates{initMu, initSigmaSquared};
+
+        gaussianDistribution updated = measurementUpdate(initialStates, gaussianDistribution{measurements[i], measurementsSigmaSquared});
+        gaussianDistribution newEstimate = statePrediction(updated, {motion[i], motionSigmaSquared});
+
+        initMu = newEstimate.getMu();
+        initSigmaSquared = newEstimate.getSigmaSquared();
+        cout << "updated state: mu- " << initMu << "sigmaSquared- " << initSigmaSquared << endl;
+    }
 }
