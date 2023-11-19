@@ -1,6 +1,7 @@
 #include <math.h>
 #include <iostream>
 #include "kalmanFilter.h"
+
 using namespace std;
 
 double Kalmanfilter::getNormalDistributionProbability(gaussianDistribution gd, const double x)
@@ -38,6 +39,6 @@ void Kalmanfilter::oneDKalmanFilter(double motion[], double &motionSigmaSquared,
 
         initMu = newEstimate.getMu();
         initSigmaSquared = newEstimate.getSigmaSquared();
-        cout << "updated state: mu- " << initMu << "sigmaSquared- " << initSigmaSquared << endl;
+        cout << "updated state: mu- " << initMu << "  sigmaSquared- " << initSigmaSquared << endl;
     }
 }

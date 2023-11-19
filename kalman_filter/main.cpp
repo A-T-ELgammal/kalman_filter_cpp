@@ -28,7 +28,7 @@ int main()
     double motion_sig = 2;
 
     // Initial state
-    double mu = 0;
+    double mu = 1;
     double sig = 1000;
 
     kf.oneDKalmanFilter(motion, motion_sig, measurements, measurement_sig, 5, mu, sig);
