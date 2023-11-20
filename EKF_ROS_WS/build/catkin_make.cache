@@ -1,0 +1,2 @@
+
+-DCATKIN_DEVEL_PREFIX=/home/ahmed/projects/udacity/Localization/localization_algorithms/EKF_ROS_WS/devel -DCMAKE_INSTALL_PREFIX=/home/ahmed/projects/udacity/Localization/localization_algorithms/EKF_ROS_WS/install -G Unix Makefiles
